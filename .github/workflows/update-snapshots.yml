@@ -1,12 +1,20 @@
 name: Workflow dispatch update snapshots.
 
-on:
-  workflow_dispatch:  # so you can run it manually
+# on:
+#   workflow_dispatch:  # so you can run it manually
 
+on:
+  issue_comment:
+    types: [created] # Only run on new comments
 # This action is disabled for now due to problems comparing the snapshots in ci
 
 jobs:
   update-snapshots:
+    # This is the magic "if" block
+    if: >
+      github.event.issue.pull_request &&
+      trim(github.event.comment.body) == '/update-snapshots' &&
+      contains(fromJSON('["OWNER", "MEMBER", "COLLABORATOR"]'), github.event.comment.author_association)
     runs-on: ubuntu-latest
     permissions:
       contents: write
