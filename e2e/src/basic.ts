@@ -6,7 +6,7 @@ function main() {
     throw new Error('Root element not found');
   }
 
-  root.innerHTML = '<h1>Hello, wold!</h1>';
+  root.innerHTML = '<h1>Hello, worrrld!</h1>';
 }
 
 main();
