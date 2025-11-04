@@ -33,7 +33,7 @@ jobs:
       - name: Strip quotes
         id: strip_quotes
         run: |
-          val=${{ steps.get_value.outputs.result }}
+          val=${{ steps.get_pr.outputs.result }}
           # Remove leading and trailing quotes
           val="${val%\"}"
           val="${val#\"}"
@@ -42,7 +42,7 @@ jobs:
       - name: Checkout PR branch
         uses: actions/checkout@v4
         with:
-          ref: ${{ steps.get_pr.outputs.stripped_value }}
+          ref: ${{ steps.strip_quotes.outputs.stripped_value }}
           fetch-depth: 0
           persist-credentials: true
           fetch-tags: true
