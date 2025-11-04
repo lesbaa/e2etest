@@ -34,7 +34,7 @@ jobs:
       - name: Checkout PR branch
         uses: actions/checkout@v4
         with:
-          ref: ${{ steps.get_pr.outputs.result }}
+          ref: ${{ replace(steps.get_pr.outputs.result, '"', '') }}
           fetch-depth: 0
           persist-credentials: true
           fetch-tags: true
