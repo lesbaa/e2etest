@@ -30,11 +30,19 @@ jobs:
               pull_number: context.payload.issue.number,
             });
             return pr.data.head.ref;
-
+      - name: Strip quotes
+        id: strip_quotes
+        run: |
+          val=${{ steps.get_value.outputs.value }}
+          # Remove leading and trailing quotes
+          val="${val%\"}"
+          val="${val#\"}"
+          echo "stripped_value=$val" >> $GITHUB_OUTPUT
+        
       - name: Checkout PR branch
         uses: actions/checkout@v4
         with:
-          ref: ${{ replace(steps.get_pr.outputs.result, '"', '') }}
+          ref: ${{ steps.get_pr.outputs.stripped_value }}
           fetch-depth: 0
           persist-credentials: true
           fetch-tags: true
