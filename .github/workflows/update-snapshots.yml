@@ -33,7 +33,7 @@ jobs:
       - name: Strip quotes
         id: strip_quotes
         run: |
-          val=${{ steps.get_value.outputs.value }}
+          val=${{ steps.get_value.outputs.result }}
           # Remove leading and trailing quotes
           val="${val%\"}"
           val="${val#\"}"
