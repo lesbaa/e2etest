@@ -8,5 +8,5 @@ export default defineConfig({
       },
     },
   },
-  root: './e2e',
+  root: 'e2e',
 });
